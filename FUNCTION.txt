@@ -1,0 +1,19 @@
+
+************************************************THE FUNCTION:
+
+CREATE OR REPLACE FUNCTION count_r(table_name IN VARCHAR2)
+RETURN NUMBER
+IS
+    total_rows NUMBER;
+BEGIN
+    EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM ' || table_name INTO total_rows;
+    RETURN total_rows;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN NULL;
+END;
+
+
+************************************************HOW TO USE IT:
+
+SELECT count_records('appointment') FROM dual;
