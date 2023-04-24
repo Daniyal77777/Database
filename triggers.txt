@@ -10,17 +10,3 @@ BEGIN
 END;
 
 *****************
-CREATE OR REPLACE TRIGGER check_client_id
-BEFORE INSERT ON MESSAGE
-FOR EACH ROW
-DECLARE
-   id_to_check NUMBER;
-   id_exists NUMBER;
-BEGIN
-   id_to_check := :new.admin_id;
-   
-   SELECT COUNT(*) INTO id_exists FROM ADMIN WHERE ADMIN_ID = id_to_check;
-   IF id_exists = 0 THEN
-      DBMS_OUTPUT.PUT_LINE('THE ID ' || id_to_check || ' does not exist');
-   END IF;
-END;
