@@ -5,7 +5,7 @@ CREATE OR REPLACE PROCEDURE sorting IS
   
   CURSOR k_ata IS
     SELECT admin_name, COUNT(*) AS gr
-    FROM adminn
+    FROM admin
     GROUP BY admin_name;
 BEGIN
   
