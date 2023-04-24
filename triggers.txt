@@ -1,0 +1,26 @@
+-->CREATE OR REPLACE TRIGGER MESS
+BEFORE INSERT ON CLIENT
+FOR EACH ROW
+ENABLE 
+DECLARE
+    NAME VARCHAR2(100);
+BEGIN   
+    SELECT :NEW.CLIENT_NAME INTO NAME FROM DUAL;
+    DBMS_OUTPUT.PUT_LINE('HELLO ' || NAME);
+END;
+
+*****************!
+--->CREATE OR REPLACE TRIGGER check_client_id
+BEFORE INSERT ON MESSAGE
+FOR EACH ROW
+DECLARE
+   id_to_check NUMBER;
+   id_exists NUMBER;
+BEGIN
+   id_to_check := :new.admin_id;
+   
+   SELECT COUNT(*) INTO id_exists FROM ADMIN WHERE ADMIN_ID = id_to_check;
+   IF id_exists = 0 THEN
+      DBMS_OUTPUT.PUT_LINE('THE ID ' || id_to_check || ' does not exist');
+   END IF;
+END;
