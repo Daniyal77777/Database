@@ -1,0 +1,26 @@
+CREATE OR REPLACE PROCEDURE sorting IS
+  
+  t_at VARCHAR2(50);
+  t_san NUMBER;
+  
+  CURSOR k_ata IS
+    SELECT admin_name, COUNT(*) AS gr
+    FROM adminn
+    GROUP BY admin_name;
+BEGIN
+  
+  FOR d_ata IN k_ata LOOP
+    t_at := d_ata.admin_name;
+    t_san := d_ata.gr;
+    
+
+    DBMS_OUTPUT.PUT_LINE('Group Name: ' || t_at || ', Group Count: ' || t_san);
+  END LOOP;
+
+END;
+
+*****************************************************************************
+BEGIN 
+   sorting; 
+END; 
+/
