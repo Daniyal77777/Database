@@ -1,0 +1,23 @@
+CREATE OR REPLACE PROCEDURE update_property_price(
+    minimum_price IN NUMBER,
+    p_new_price IN NUMBER,
+    updated_rows OUT NUMBER
+)
+IS 
+BEGIN
+    UPDATE PROPERTY
+    SET price = p_new_price
+    WHERE price < minimum_price;
+
+    updated_rows := SQL%ROWCOUNT;
+
+    DBMS_OUTPUT.PUT_LINE(updated_rows || ' rows updated.');
+END;
+
+**************************************************************** WHEN WE WANT TO CALL THIS PROCEDURE:
+
+DECLARE
+    r_updated NUMBER;
+BEGIN
+    update_property_price(700000, 800000, r_updated);
+END;
