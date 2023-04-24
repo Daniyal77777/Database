@@ -7,7 +7,7 @@ DECLARE
     TITLE_TOO_SHORT EXCEPTION;
 BEGIN
     
-    V_TITLE := :NEW.AGENT_ID;
+    V_TITLE := :NEW.AGENT_NAME;
     word_length := LENGTH(V_TITLE);
     
     IF word_length < 5 THEN
