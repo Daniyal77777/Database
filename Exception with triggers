@@ -1,0 +1,23 @@
+CREATE OR REPLACE TRIGGER check_word_length
+AFTER INSERT ON TEST_AGENT
+FOR EACH ROW
+DECLARE
+    word_length NUMBER;
+    V_TITLE VARCHAR2(40);
+    TITLE_TOO_SHORT EXCEPTION;
+BEGIN
+    -- Get the length of the inserted word
+    V_TITLE := :NEW.AGENT_ID;
+    word_length := LENGTH(V_TITLE);
+    -- If the length is less than 5, raise an exception
+    IF word_length < 5 THEN
+        RAISE TITLE_TOO_SHORT;
+    END IF;
+    DBMS_OUTPUT.PUT_LINE('TITLE INPUT: '  V_TITLE);
+
+EXCEPTION
+    WHEN TITLE_TOO_SHORT THEN
+        DBMS_OUTPUT.PUT_LINE('This Name less than 5');
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('ERROR: '  SQLERRM);
+END;
