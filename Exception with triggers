@@ -6,10 +6,10 @@ DECLARE
     V_TITLE VARCHAR2(40);
     TITLE_TOO_SHORT EXCEPTION;
 BEGIN
-    -- Get the length of the inserted word
+    
     V_TITLE := :NEW.AGENT_ID;
     word_length := LENGTH(V_TITLE);
-    -- If the length is less than 5, raise an exception
+    
     IF word_length < 5 THEN
         RAISE TITLE_TOO_SHORT;
     END IF;
